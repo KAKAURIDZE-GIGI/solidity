@@ -58,4 +58,25 @@ describe("Wallet contract", function () {
     expect(finalWalletBalance).to.equal(ethers.parseEther("0.5"));
     expect(finalAddr1Balance).to.equal(ethers.parseEther("0.5"));
   });
+
+  it("should return correct balance", async function () {
+    await addr1.sendTransaction({
+      to: wallet.target,
+      value: ethers.parseEther("2.0"),
+    });
+
+    expect(await ethers.provider.getBalance(wallet.target)).to.equal(
+      ethers.parseEther("2.0")
+    );
+  });
+  it("Only owner can withdraw", async function () {
+    await addr2.sendTransaction({
+      to: wallet.target,
+      value: ethers.parseEther("1.0"),
+    });
+
+    await expect(
+      wallet.connect(addr1).withdraw(addr1.address, ethers.parseEther("0.5"))
+    ).to.be.revertedWith("Only owner can withdraw");
+  });
 });
