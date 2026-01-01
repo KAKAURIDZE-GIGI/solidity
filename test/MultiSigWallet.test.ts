@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { expect } from "chai";
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 
-describe("Wallet contract", function () {
+describe("Multi signature wallet contract", function () {
   let wallet: any;
   let owner1: SignerWithAddress;
   let owner2: SignerWithAddress;
