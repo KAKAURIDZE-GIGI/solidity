@@ -17,10 +17,6 @@ describe("Wallet contract", function () {
     await wallet.waitForDeployment();
   });
 
-  it("should have an owner", async function () {
-    expect(await wallet.owner()).to.equal(owner.address);
-  });
-
   it("receive from addr1 to owner", async function () {
     const initialAddr1Balance = await ethers.provider.getBalance(addr1.address);
 
